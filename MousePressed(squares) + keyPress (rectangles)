@@ -1,0 +1,28 @@
+float xpos = 600;
+float ypos = 600;
+
+void setup(){
+  size(600,600);
+}
+
+void draw(){
+  
+  
+}
+
+void mousePressed(){
+  background(255,255,255);
+  fill(50,28,170);
+  ellipse(550,50,30,30);
+  ellipse(50,550,30,30);
+  ellipse(50,50,30,30);
+  ellipse(550,550,30,30);
+}
+ void keyPressed(){
+   background(255,255,255);
+   fill(155,50,10);
+   rect(530,30,50,50);
+   rect(30,530,50,50);
+   rect(30,30,50,50);
+   rect(530,530,50,50);
+ }
