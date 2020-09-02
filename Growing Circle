@@ -1,0 +1,18 @@
+float heightOfCircle = 50;
+
+viod setup(){
+  size(600,600);
+}
+
+void draw(){
+  ellipse(width/2, height/2 ,widthOfCircle ,heightOfCircle);
+  
+}
+
+void mousePressed(){
+  widthOfCircle = widthOfCircle + 10;
+
+}
+ void keyPressed(){
+   heightOfCircle = heightOfCircle + 10;
+ }
