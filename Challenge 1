@@ -8,14 +8,4 @@ void draw () {
   ellipse (mouseX +50, mouseY -50, 25, 25);
   ellipse (mouseX -50, mouseY -50, 25, 25);
   ellipse (mouseX -50, mouseY +50, 25, 25);
-}void setup() {
-  size (650,650);
-}
 
-void draw () {
-  background (255,255,255);
-  ellipse (mouseX +50, mouseY +50, 25, 25);
-  ellipse (mouseX +50, mouseY -50, 25, 25);
-  ellipse (mouseX -50, mouseY -50, 25, 25);
-  ellipse (mouseX -50, mouseY +50, 25, 25);
-}
