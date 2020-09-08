@@ -1,0 +1,24 @@
+ 
+float w1 = 300;
+float h1 = 300;
+float d= 25;
+
+void setup(){
+  size(600,600);
+ 
+}
+
+void draw(){
+background(255);
+ellipse(w1,h1,50,50);
+}
+
+void keyPressed(){
+  if (w1<0) {
+  d = d * -1;
+}
+  else if (w1>600) {
+    d = d* -1;
+}
+  w1 = w1 + d;
+}
