@@ -1,0 +1,24 @@
+
+void setup(){
+  size(600,600);
+ 
+}
+
+void draw(){
+background(red, 0, blue);
+fill(0, 0, 0);
+ellipse(w1,h1,50,50);
+  if (w1-25<0) {
+  d = d * -1;
+  red = red -5;
+  blue = blue +5;
+  
+}
+  else if (w1+25>600) {
+    d = d* -1;
+    red = red -5;
+    blue = blue +5;
+}
+  w1 = w1 + d;
+}
+
