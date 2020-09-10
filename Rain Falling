@@ -1,0 +1,21 @@
+float w1 = random(600);
+float h1 = 0;
+float d = 10;
+
+
+void setup(){
+  size(600,600);
+ 
+}
+
+void draw(){
+background(255);
+fill(0, 0, 0);
+ellipse(w1,h1,30,30);
+h1 = h1 + 10;
+
+if (h1> 600) {
+ h1 = 0;
+ w1 = random (600);
+}
+}
