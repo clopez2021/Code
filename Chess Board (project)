@@ -1,0 +1,23 @@
+void setup() {
+  size (1100, 1000);
+  background (0);
+  noStroke();
+ 
+}
+
+void draw() {
+  //rect chess board
+  for (int x=100; x<100*8; x+=200) {
+    for (int y=100; y<100*8; y+=200) {
+      fill (255);
+      rect (x, y, 100, 100);
+      rect (x+100, y+100, 100, 100);
+    }
+   
+   //side of chess board
+    strokeWeight (3);
+    stroke (255);
+    noFill();
+    rect(100, 100, 100*8, 100*8);
+  }
+}
