@@ -1,0 +1,227 @@
+//Snake Game
+Segment[] snake;
+boolean up = false;
+boolean down = false;
+boolean right = false;
+boolean left = false;
+int count = 144;
+int active = 1;
+float segLength;
+float tick = 15;
+Apple apple;
+boolean eaten = true;
+PFont myFont;
+String scoreText;
+int score = 1;
+
+
+
+void setup(){
+  size(600,600);
+  
+  myFont = createFont("Anonymous-48",34);
+  textFont(myFont);
+  
+  snake = new Segment[count];
+  //snake[0] = new Segment (50,0);
+  
+  for(int i = 1; i < count; i++){
+    snake[i] = new Segment(-10000,-10000);
+  }
+  segLength = snake[0].speed;
+  spawnHead();
+  
+  apple = new Apple(segLength);
+}
+
+void draw(){
+  background(255);
+  
+  scoreText= "" + score;
+  text(scoreText, 5, 50);
+
+  for(int i = 0; i < active; i++){
+    snake[i].display();
+  }
+  
+ appleUpdate();
+ eat();
+
+if(frameCount % tick == 0){
+  
+//Make the snake's head move
+if(down == true){
+  snake[0].ypos += segLength;
+}else if(up == true){
+  snake[0].ypos -= segLength;
+}else if(right == true){
+  snake[0].xpos += segLength;
+}else if(left == true){
+  snake[0].xpos -= segLength;
+  }
+  
+  if(snake[0].xpos < 0){
+    snake[0].xpos = width;
+  }else if(snake[0].xpos > width){
+    snake[0].xpos = 0;
+  }else if(snake[0].ypos < 0){
+    snake[0].ypos = height;
+  }else if(snake[0].ypos > height){
+    snake[0].ypos = 0;
+  }
+  
+  moveBody();
+  checkCollison();
+  
+ }
+}
+void keyPressed(){
+  if(keyCode == DOWN){
+    down = true;
+    up = false;
+    right = false;
+    left = false;
+  }else if(keyCode == UP){
+    down = false;
+    up = true;
+    right = false;
+    left = false;
+  }else if(keyCode == RIGHT){
+    down = false;
+    up = false;
+    right = true;
+    left = false;
+  }else if(keyCode == LEFT){
+    down = false;
+    up = false;
+    right = false;
+    left = true;
+  }
+  
+}
+
+/*void keyReleased(){
+  if(down == true){
+    snake[0].ypos += snake[0].speed;
+    down = false;
+  }else if(up == true){
+    snake[0].ypos -= snake[0].speed;
+    up = false;
+  }else if(right == true){
+    snake[0].xpos += snake[0].speed;
+    right = false;
+  }else if(left== true){
+    snake[0].xpos -= snake[0].speed;
+    left = false;
+  }
+}
+*/
+
+void spawnHead(){
+  snake[0].xpos = round(random(1, width/segLength)-1)*segLength;
+  snake[0].ypos = round(random(1, width/segLength)-1)*segLength;
+}
+
+void moveBody(){
+  snake[0].preXpos = snake[0].xpos;
+  snake[0].preYpos = snake[0].ypos;
+  for(int i = 1; i > active; i++){
+    snake[i].preXpos = snake[i].xpos;
+    snake[i].preYpos = snake[i].ypos;
+    snake[i].xpos = snake[i - 1].preXpos;
+    snake[i].ypos = snake[i - 1].preYpos;
+    
+    
+  }
+}
+
+void appleUpdate(){
+  if(eaten == false){
+    apple.display();
+  }
+  if(eaten == true){
+    apple.xpos = round(random(1, width/segLength)-1)*segLength;
+    apple.ypos = round(random(1, width/segLength)-1)*segLength;
+    eaten = false;
+  }  
+}
+
+void eat(){
+  if(snake[0].xpos == apple.xpos && snake[0].ypos == apple.ypos){
+  eaten = true;
+  active += 1;
+  score += 1;
+}
+}
+
+void checkCollison(){
+  for(int i = 2; i < active; i++){
+   if(snake[0].xpos== snake[i].xpos && snake[0].ypos == snake[i].ypos){
+     active = 2;
+     score = 1;
+     
+     for(int j = 1; j < count; j++){
+       snake[j].xpos = -10000;
+       snake[j].ypos = -10000;
+   }
+  }
+ }
+}
+
+
+
+
+
+
+
+
+//Apple
+
+class Apple{
+  float xpos;
+  float ypos;
+  float w;
+  
+  Apple(float tempW){
+    w = tempW;
+  }
+  
+  void display(){
+    fill(255,0,0);
+    rect(xpos, ypos, w, w);
+  }
+  
+}
+
+
+
+
+
+//Segment
+
+class Segment{
+  float xpos;
+  float ypos;
+  float preXpos;
+  float preYpos;
+  color cAlive = color(0,255,0);
+  color cDead = color(0);
+  boolean alive = true;
+  float speed= 30;
+  
+  
+  Segment(float tempX, float tempY){
+    xpos = tempX;
+    ypos = tempY;
+    
+  }
+  
+  void display(){
+    if(alive == true){
+      fill(cAlive);
+    }else if(alive == false){
+      fill(cDead);
+    }
+    rect(xpos, ypos, speed, speed);
+  }
+}
