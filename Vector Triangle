@@ -1,0 +1,39 @@
+PVector position;
+PVector direction1;
+PVector direction2;
+PVector direction3;
+float rotationAngle = .1;
+
+
+void setup(){
+ size(600,600); 
+ position = new PVector(width/2, height/2);
+ direction1 = new PVector(0, -1);
+ direction2 = new PVector(-3, 5);
+ direction3 = new PVector(3, 5);
+}
+
+void draw(){
+  background(255);
+  
+  stroke(0);
+  strokeWeight(5);
+  
+  direction1.setMag(30);
+  direction2.setMag(30);
+  direction3.setMag(30);
+  triangle(position.x+direction1.x, position.y+direction1.y, position.x+direction2.x, position.y+direction2.y, position.x+direction3.x, position.y+direction3.y );
+  
+}
+
+void keyPressed(){
+ if(keyCode == RIGHT){
+   direction1.rotate(rotationAngle);
+   direction2.rotate(rotationAngle);
+   direction3.rotate(rotationAngle);
+ }else if(keyCode == LEFT){
+   direction1.rotate(-rotationAngle);
+   direction2.rotate(-rotationAngle);
+   direction3.rotate(-rotationAngle);
+ }
+}
