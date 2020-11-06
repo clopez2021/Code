@@ -1,0 +1,133 @@
+PVector position;
+PVector direction1;
+PVector direction2;
+PVector direction3;
+float rotationAngle = .1;
+PVector vel;
+PVector acc;
+
+//ball
+PVector bpos;
+PVector bvel;
+
+
+PVector astPos1;
+PVector astVel1;
+int randNumb;
+
+PVector astPos2;
+PVector astVel2;
+
+void setup(){
+ size(600,600); 
+ position = new PVector(width/2, height/2);
+ direction1 = new PVector(0, -1);
+ direction2 = new PVector(-3, 5);
+ direction3 = new PVector(3, 5);
+ vel = new PVector(0,0);
+ acc = new PVector(0,-1);
+ acc.setMag(.3);
+ 
+ //ball
+ bpos = new PVector(-100,-100);
+ bvel = new PVector(0,0);
+ 
+ 
+ astPos1 = new PVector(random(600), random(600));
+ astVel1 = new PVector(random(1,5), random(1,5));
+ 
+ astPos2 = new PVector(random(600), random(600));
+ astVel2 = new PVector(random(1,5), random(1,5));
+ 
+}
+
+void draw(){
+  background(0);
+  
+  stroke(0);
+  strokeWeight(5);
+  
+  fill(255,255,0);
+  direction1.setMag(30);
+  direction2.setMag(30);
+  direction3.setMag(30);
+  position.add(vel);
+  triangle(position.x+direction1.x, position.y+direction1.y, position.x+direction2.x, position.y+direction2.y, position.x+direction3.x, position.y+direction3.y);
+   
+  fill(255);
+  //ball
+  bpos.add(bvel);
+  ellipse(bpos.x, bpos.y, 10, 10);
+
+  //astro
+  astPos1.add(astVel1);
+  ellipse(astPos1.x, astPos1.y, 50, 50);
+  
+  astPos2.add(astVel2);
+  ellipse(astPos2.x, astPos2.y, 50, 50);
+
+  
+  
+  if(position.x < 0){
+    position.x = width;
+  }else if(position.x > width){
+    position.x = 0;
+  }else if(position.y > height){
+    position.y = 0;
+  }else if(position.y < 0){
+    position.y = height;
+  }
+  
+  //ast
+  if(astPos1.x < 0){
+    astPos1.x = width;
+  }else if(astPos1.x > width){
+    astPos1.x = 0;
+  }else if(astPos1.y > height){
+    astPos1.y = 0;
+  }else if(astPos1.y < 0){
+    astPos1.y = height;
+  }
+  
+    if(astPos2.x < 0){
+    astPos2.x = width;
+  }else if(astPos2.x > width){
+    astPos2.x = 0;
+  }else if(astPos2.y > height){
+    astPos2.y = 0;
+  }else if(astPos2.y < 0){
+    astPos2.y = height;
+  }
+  
+ // if(dist(position.x, position.y, astPos1.x, astPos1.y) <= 50){
+  //  pos.set(width*5, height*5);
+   // vel.set(0,0);
+  
+  
+}
+
+void keyPressed(){
+ if(keyCode == RIGHT){
+   direction1.rotate(rotationAngle);
+   direction2.rotate(rotationAngle);
+   direction3.rotate(rotationAngle);
+   acc.rotate(rotationAngle);
+ }else if(keyCode == LEFT){
+   direction1.rotate(-rotationAngle);
+   direction2.rotate(-rotationAngle);
+   direction3.rotate(-rotationAngle);
+   acc.rotate(-rotationAngle);
+ }else if(keyCode == UP){
+   vel.add(acc);
+ }else if(keyCode == DOWN){
+   vel.sub(acc);
+ }else if(keyCode == ENTER){
+   vel.set(0,0);
+ }else if(keyCode == ' '){
+   bpos.x = position.x + direction1.x;
+   bpos.y = position.y + direction1.y;
+   bvel.x = direction1.x;
+   bvel.y = direction1.y;
+   bvel.setMag(5);
+ }
+}
