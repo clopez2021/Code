@@ -1,0 +1,28 @@
+  
+float w1 = 300;
+float h1 = 300;
+//d = speed ball
+float d = 10;
+
+
+void setup(){
+  size(600,600);
+ 
+}
+
+void draw(){
+background(255, 0, 50);
+fill(0);
+ellipse(w1,h1,50,50);
+
+//collision detected, bounces the ball back
+  if (w1-25<0) {
+   d = d * -1;
+}
+  else if (w1+25>600) {
+    //makes the ball bounce back
+   d = d * -1;
+}
+ //makes the ball move
+  w1 = w1 + d;
+}
