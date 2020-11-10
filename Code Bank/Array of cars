@@ -1,0 +1,50 @@
+Car[] myCars = new Car[100];
+
+void setup(){
+  size(500,500);
+  //sets the array of cars
+  for(int i = 0; i < myCars.length; i = i + 1){
+  //set the variables to something
+   myCars[i] = new Car(color(random(255),random(255),random(255)),random(width),random(height),random(15)); 
+  }
+}
+
+void draw(){
+ background(0);
+ for(int i = 0; i < myCars.length; i = i + 1){
+   myCars[i].drive();
+   myCars[i].display();
+ }
+}
+
+
+//new TAB
+class Car{
+ 
+ color c;
+ float xpos;
+ float ypos;
+ float xspeed;
+  
+ Car(color tempC, float tempXpos, float tempYpos, float tempXspeed){
+  c = tempC;
+  xpos = tempXpos;
+  ypos = tempYpos;
+  xspeed = tempXspeed;
+ }
+ 
+ void display(){
+   rectMode(CENTER);
+   fill(c);
+   rect(xpos,ypos,20,10);
+ }
+ 
+ //makes the cars move
+ void drive(){
+  xpos = xpos + xspeed;
+  //makes the cars appear on the screen again at X= 0
+  if(xpos > width){
+   xpos = 0; 
+  }
+ }
+}
